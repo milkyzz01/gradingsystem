@@ -186,7 +186,9 @@ if (!isset($_SESSION['adminUsername'])) {
                            echo "<td>" . $row['studentID'] . "</td>";
                            echo "<td>" . $row['studentName'] . "</td>";
                            echo "<td>";
-                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupCrim(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Add Grade</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupCrimPrelims(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Prelims</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupCrimMidterm(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Midterm</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupCrimFinals(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Finals</button>";
                            echo "<button class='delete-student-btn' onclick='deleteStudent(" . $row['studentID'] . ")'>Delete Student</button></div>";
                            echo "</td>";
                            echo "</tr>";
@@ -226,7 +228,9 @@ if (!isset($_SESSION['adminUsername'])) {
                            echo "<td>" . $row['studentID'] . "</td>";
                            echo "<td>" . $row['studentName'] . "</td>";
                            echo "<td>";
-                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupIT(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Add Grade</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupITprelims(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Prelims</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupITmidterm(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Midterm</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupITFinals(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Finals</button>";
                            echo "<button class='delete-student-btn' onclick='deleteStudent(" . $row['studentID'] . ")'>Delete Student</button></div>";
                            echo "</td>";
                            echo "</tr>";
@@ -266,7 +270,9 @@ if (!isset($_SESSION['adminUsername'])) {
                            echo "<td>" . $row['studentID'] . "</td>";
                            echo "<td>" . $row['studentName'] . "</td>";
                            echo "<td>";
-                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupComsci(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Add Grade</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupComsciPrelims(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Prelims</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupComsciMidterm(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Midterm</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupComsciFinals(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Finals</button>";
                            echo "<button class='delete-student-btn' onclick='deleteStudent(" . $row['studentID'] . ")'>Delete Student</button></div>";
                            echo "</td>";
                            echo "</tr>";
@@ -306,7 +312,9 @@ if (!isset($_SESSION['adminUsername'])) {
                            echo "<td>" . $row['studentID'] . "</td>";
                            echo "<td>" . $row['studentName'] . "</td>";
                            echo "<td>";
-                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupCivil(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Add Grade</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupCivilPrelims(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Prelims</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupCivilMidterm(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Midterm</button>";
+                           echo "<div class='buttons-enrolled-un'><button class='adds-grade-btn' onclick='showPopupCivilFinals(" . $row['studentID'] . ", \"" . $row['studentName'] . "\")'>Finals</button>";
                            echo "<button class='delete-student-btn' onclick='deleteStudent(" . $row['studentID'] . ")'>Delete Student</button></div>";
                            echo "</td>";
                            echo "</tr>";
@@ -322,10 +330,10 @@ if (!isset($_SESSION['adminUsername'])) {
         </div>
 
 
-        <!-- Popup Div for crim  -->
-        <div id="popup" class="popup">
-        <form id="grade-form-crim" onsubmit="event.preventDefault(); submitFormCrim();"> 
-             <h2 class="input-grades">Input Grades</h2>
+        <!-- Popup Div for crim PRELIMS  -->
+        <div id="popupCrimPrelims" class="popup">
+        <form id="grade-prelims-crim" onsubmit="event.preventDefault(); submitFormCrimPrelims();"> 
+             <h2 class="input-grades">Input Prelims Grades</h2>
              <label for="math">Crime Scene Investigation Grade:</label>
              <select id="CrimeScene" name="CrimeScene" required>
                  <option value="1.00">1.00</option>
@@ -415,20 +423,226 @@ if (!isset($_SESSION['adminUsername'])) {
                  <option value="5.00">5.00</option>
                  <option value="INC">INC</option>
              </select><br><br>
-             <input type="hidden" id="studentID" name="studentID">
-             <input type="hidden" id="studentName" name="studentName">
+             <input type="hidden" id="CrimPrelimsstudentID" name="CrimPrelimsstudentID">
+             <input type="hidden" id="CrimPrelimsstudentName" name="CrimPrelimsstudentName">
              
              <input class="grade-submit" type="submit" value="Submit">
-             <button class="grade-back" type="button" onclick="hidePopupCrim()">Close</button>
+             <button class="grade-back" type="button" onclick="hidePopupCrimPrelims()">Close</button>
          </form>
         </div>
-        <!-- Overlay -->
-        <div id="overlay" class="overlay"></div>
+        <!-- Overlay crim prelims -->
+        <div id="overlayCrimPrelims" class="overlay"></div>
 
-        <!-- Popup Div for IT  -->
-        <div id="popupIT" class="popupIT">
-        <form id="grade-form-IT" onsubmit="event.preventDefault(); submitFormIT();"> 
-            <h2 class="input-grades">Input Grades</h2>
+        <!-- Popup midterm crim -->
+        <div id="popupCrimMidterm" class="popup">
+        <form id="grade-Midterm-crim" onsubmit="event.preventDefault(); submitFormCrimMidterm();"> 
+             <h2 class="input-grades">Input Prelims Grades</h2>
+             <label for="math">Crime Scene Investigation Grade:</label>
+             <select id="CrimeScene" name="CrimeScene" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="filipino">Forensic Psychology Grade:</label>
+             <select id="Forensic" name="Forensic" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="english">Legal Studies Grade:</label>
+             <select id="Legal" name="Legal" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="science">Criminal Law Grade:</label>
+             <select id="Criminal" name="Criminal" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="pe">Victimology Grade:</label>
+             <select id="Victimology" name="Victimology" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="ap">Criminal Justice Grade:</label>
+             <select id="Justice" name="Justice" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             <input type="hidden" id="CrimMidtermstudentID" name="CrimMidtermstudentID">
+             <input type="hidden" id="CrimMidtermstudentName" name="CrimMidtermstudentName">
+             
+             <input class="grade-submit" type="submit" value="Submit">
+             <button class="grade-back" type="button" onclick="hidePopupCrimMidterm()">Close</button>
+         </form>
+        </div>
+        <!-- Overlay crim midterms -->
+        <div id="overlayCrimMidterm" class="overlay"></div>
+
+        <!-- Popup finals crim -->
+        <div id="popupCrimFinals" class="popup">
+        <form id="grade-Finals-crim" onsubmit="event.preventDefault(); submitFormCrimFinals();"> 
+             <h2 class="input-grades">Input Finals Grades</h2>
+             <label for="math">Crime Scene Investigation Grade:</label>
+             <select id="CrimeScene" name="CrimeScene" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="filipino">Forensic Psychology Grade:</label>
+             <select id="Forensic" name="Forensic" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="english">Legal Studies Grade:</label>
+             <select id="Legal" name="Legal" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="science">Criminal Law Grade:</label>
+             <select id="Criminal" name="Criminal" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="pe">Victimology Grade:</label>
+             <select id="Victimology" name="Victimology" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             
+             <label for="ap">Criminal Justice Grade:</label>
+             <select id="Justice" name="Justice" required>
+                 <option value="1.00">1.00</option>
+                 <option value="1.25">1.25</option>
+                 <option value="1.50">1.50</option>
+                 <option value="1.75">1.75</option>
+                 <option value="2.00">2.00</option>
+                 <option value="2.25">2.25</option>
+                 <option value="2.50">2.50</option>
+                 <option value="2.75">2.75</option>
+                 <option value="3.00">3.00</option>
+                 <option value="5.00">5.00</option>
+                 <option value="INC">INC</option>
+             </select><br><br>
+             <input type="hidden" id="CrimFinalsstudentID" name="CrimFinalsstudentID">
+             <input type="hidden" id="CrimFinalsstudentName" name="CrimFinalsstudentName">
+             
+             <input class="grade-submit" type="submit" value="Submit">
+             <button class="grade-back" type="button" onclick="hidePopupCrimFinals()">Close</button>
+         </form>
+        </div>
+        <!-- Overlay crim finals -->
+        <div id="overlayCrimFinals" class="overlay"></div>
+
+        <!-- Popup Div for IT PRELIMS  -->
+        <div id="popupITprelims" class="popupIT">
+        <form id="grade-prelims-IT" onsubmit="event.preventDefault(); submitFormITprelims();"> 
+            <h2 class="input-grades">Input Prelims Grades</h2>
             <label for="math">Programming Fundamentals Grade:</label>
             <select id="Programming" name="Programming" required>
                 <option value="1.00">1.00</option>
@@ -518,20 +732,226 @@ if (!isset($_SESSION['adminUsername'])) {
                 <option value="5.00">5.00</option>
                 <option value="INC">INC</option>
             </select><br><br>
-            <input type="hidden" id="studentIDIT" name="studentIDIT">
-            <input type="hidden" id="studentNameIT" name="studentNameIT">
+            <input type="hidden" id="PrelimsstudentIDIT" name="PrelimsstudentIDIT">
+            <input type="hidden" id="PrelimsstudentNameIT" name="PrelimsstudentNameIT">
             
             <input class="grade-submit" type="submit" value="Submit">
-            <button class="grade-back" type="button" onclick="hidePopupIT()">Close</button>
+            <button class="grade-back" type="button" onclick="hidePopupITprelims()">Close</button>
         </form>
         </div>
-        <!-- Overlay IT -->
-        <div id="overlayIT" class="overlayIT"></div>
+        <!-- Overlay IT prelims -->
+        <div id="overlayITprelims" class="overlayIT"></div>
 
-        <!-- Popup Div for Comsci  -->
-        <div id="popupComsci" class="popupComsci">
-        <form id="grade-form-Comsci" onsubmit="event.preventDefault(); submitFormComsci();"> 
-            <h2 class="input-grades">Input Grades</h2>
+        <!-- Popup Div for IT midterm  -->
+        <div id="popupITmidterm" class="popupIT">
+        <form id="grade-midterm-IT" onsubmit="event.preventDefault(); submitFormITmidterm();"> 
+            <h2 class="input-grades">Input Midterm Grades</h2>
+            <label for="math">Programming Fundamentals Grade:</label>
+            <select id="Programming" name="Programming" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="filipino">Database Management Grade:</label>
+            <select id="Database" name="Database" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="english">Web Development Grade:</label>
+            <select id="Web" name="Web" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="science">Networking Grade:</label>
+            <select id="Networking" name="Networking" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="pe">Operating Systems Grade:</label>
+            <select id="Operating" name="Operating" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="ap">Information Security Grade:</label>
+            <select id="Information" name="Information" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            <input type="hidden" id="MidtermstudentIDIT" name="MidtermstudentIDIT">
+            <input type="hidden" id="MidtermstudentNameIT" name="MidtermstudentNameIT">
+            
+            <input class="grade-submit" type="submit" value="Submit">
+            <button class="grade-back" type="button" onclick="hidePopupITmidterm()">Close</button>
+        </form>
+        </div>
+        <!-- Overlay IT midterms -->
+        <div id="overlayITmidterm" class="overlayIT"></div>
+
+        <!-- Popup Div for IT finals -->
+        <div id="popupITFinals" class="popupIT">
+        <form id="grade-Finals-IT" onsubmit="event.preventDefault(); submitFormITFinals();"> 
+            <h2 class="input-grades">Input Finals Grades</h2>
+            <label for="math">Programming Fundamentals Grade:</label>
+            <select id="Programming" name="Programming" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="filipino">Database Management Grade:</label>
+            <select id="Database" name="Database" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="english">Web Development Grade:</label>
+            <select id="Web" name="Web" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="science">Networking Grade:</label>
+            <select id="Networking" name="Networking" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="pe">Operating Systems Grade:</label>
+            <select id="Operating" name="Operating" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="ap">Information Security Grade:</label>
+            <select id="Information" name="Information" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            <input type="hidden" id="FinalsstudentIDIT" name="FinalsstudentIDIT">
+            <input type="hidden" id="FinalsstudentNameIT" name="FinalsstudentNameIT">
+            
+            <input class="grade-submit" type="submit" value="Submit">
+            <button class="grade-back" type="button" onclick="hidePopupITFinals()">Close</button>
+        </form>
+        </div>
+        <!-- Overlay IT finals -->
+        <div id="overlayITFinals" class="overlayIT"></div>
+
+        <!-- Popup Div for Comsci Prelims  -->
+        <div id="PrelimspopupComsci" class="popupComsci">
+        <form id="grade-Prelims-Comsci" onsubmit="event.preventDefault(); submitFormComsciPrelims();"> 
+            <h2 class="input-grades">Input Prelims Grades</h2>
             
             <label for="math">Algorithms Grade:</label>
             <select id="Algorithms" name="Algorithms" required>
@@ -623,20 +1043,228 @@ if (!isset($_SESSION['adminUsername'])) {
                 <option value="INC">INC</option>
             </select><br><br>
             
-            <input type="hidden" id="studentIDcomSci" name="studentIDcomSci">
-            <input type="hidden" id="studentNameComSci" name="studentNameComSci">
+            <input type="hidden" id="PrelimsstudentIDcomSci" name="PrelimsstudentIDcomSci">
+            <input type="hidden" id="PrelimsstudentNameComSci" name="PrelimsstudentNameComSci">
             
             <input class="grade-submit" type="submit" value="Submit">
-            <button class="grade-back" type="button" onclick="hidePopupComsci()">Close</button>
+            <button class="grade-back" type="button" onclick="hidePopupComsciPrelims()">Close</button>
         </form>
         </div>
-        <!-- Overlay Comsci -->
-        <div id="overlayComsci" class="overlayComsci"></div>
+        <!-- Overlay Comsci Prelims -->
+        <div id="PrelimsoverlayComsci" class="overlayComsci"></div>
 
-        <!-- Popup Div for Civil  -->
-        <div id="popupCivil" class="popupCivil">
-        <form id="grade-form-Civil" onsubmit="event.preventDefault(); submitFormCivil();"> 
-            <h2 class="input-grades">Input Grades</h2>
+        <!-- Popup Div for Comsci midterms  -->
+        <div id="MidtermpopupComsci" class="popupComsci">
+        <form id="grade-midterm-Comsci" onsubmit="event.preventDefault(); submitFormComsciMidterm();"> 
+            <h2 class="input-grades">Input Midterm Grades</h2>
+            
+            <label for="math">Algorithms Grade:</label>
+            <select id="Algorithms" name="Algorithms" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="filipino">Data Structures Grade:</label>
+            <select id="Structures" name="Structures" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="english">Software Engineering Grade:</label>
+            <select id="Software" name="Software" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="science">Computer Architecture Grade:</label>
+            <select id="Architecture" name="Architecture" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="pe">Artificial Intelligence Grade:</label>
+            <select id="Intelligence" name="Intelligence" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="ap">Computer Graphics Grade:</label>
+            <select id="Graphics" name="Graphics" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            <input type="hidden" id="MidtermstudentIDcomSci" name="MidtermstudentIDcomSci">
+            <input type="hidden" id="MidtermstudentNameComSci" name="MidtermstudentNameComSci">
+            
+            <input class="grade-submit" type="submit" value="Submit">
+            <button class="grade-back" type="button" onclick="hidePopupComsciMidterm()">Close</button>
+        </form>
+        </div>
+        <!-- Overlay Comsci midterms -->
+        <div id="MidtermoverlayComsci" class="overlayComsci"></div>
+
+        <!-- Popup Div for Comsci finals  -->
+        <div id="FinalspopupComsci" class="popupComsci">
+        <form id="grade-Finals-Comsci" onsubmit="event.preventDefault(); submitFormComsciFinals();"> 
+            <h2 class="input-grades">Input Finals Grades</h2>
+            
+            <label for="math">Algorithms Grade:</label>
+            <select id="Algorithms" name="Algorithms" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="filipino">Data Structures Grade:</label>
+            <select id="Structures" name="Structures" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="english">Software Engineering Grade:</label>
+            <select id="Software" name="Software" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="science">Computer Architecture Grade:</label>
+            <select id="Architecture" name="Architecture" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="pe">Artificial Intelligence Grade:</label>
+            <select id="Intelligence" name="Intelligence" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="ap">Computer Graphics Grade:</label>
+            <select id="Graphics" name="Graphics" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            <input type="hidden" id="FinalsstudentIDcomSci" name="FinalsstudentIDcomSci">
+            <input type="hidden" id="FinalsstudentNameComSci" name="FinalsstudentNameComSci">
+            
+            <input class="grade-submit" type="submit" value="Submit">
+            <button class="grade-back" type="button" onclick="hidePopupComsciFinals()">Close</button>
+        </form>
+        </div>
+        <!-- Overlay Comsci finals -->
+        <div id="FinalsoverlayComsci" class="overlayComsci"></div>
+
+        <!-- Popup Div for Civil Prelims  -->
+        <div id="PrelimspopupCivil" class="popupCivil">
+        <form id="grade-Prelims-Civil" onsubmit="event.preventDefault(); submitFormCivilPrelims();"> 
+            <h2 class="input-grades">Input Prelims Grades</h2>
             
             <label for="math">Statics Grade:</label>
             <select id="Statics" name="Statics" required>
@@ -728,15 +1356,223 @@ if (!isset($_SESSION['adminUsername'])) {
                 <option value="INC">INC</option>
             </select><br><br>
             
-            <input type="hidden" id="studentIDcivil" name="studentIDcivil">
-            <input type="hidden" id="studentNameCivil" name="studentNameCivil">
+            <input type="hidden" id="PrelimsstudentIDcivil" name="PrelimsstudentIDcivil">
+            <input type="hidden" id="PrelimsstudentNameCivil" name="PrelimsstudentNameCivil">
             
             <input class="grade-submit" type="submit" value="Submit">
-            <button class="grade-back" type="button" onclick="hidePopupCivil()">Close</button>
+            <button class="grade-back" type="button" onclick="hidePopupCivilPrelims()">Close</button>
         </form>
         </div>
-        <!-- Overlay Civil -->
-        <div id="overlayCivil" class="overlayCivil"></div>
+        <!-- Overlay Civil prelims -->
+        <div id="PrelimsoverlayCivil" class="overlayCivil"></div>
+
+        <!-- Popup Div for Civil midterm  -->
+        <div id="MidtermpopupCivil" class="popupCivil">
+        <form id="grade-Midterm-Civil" onsubmit="event.preventDefault(); submitFormCivilMidterm();"> 
+            <h2 class="input-grades">Input Midterm Grades</h2>
+            
+            <label for="math">Statics Grade:</label>
+            <select id="Statics" name="Statics" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="filipino">Structural Analysis Grade:</label>
+            <select id="Structural" name="Structural" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="english">Fluid Mechanics Grade:</label>
+            <select id="Fluid" name="Fluid" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="science">Geotechnical Engineering Grade:</label>
+            <select id="Geotechnical" name="Geotechnical" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="pe">Transportation Engineering Grade:</label>
+            <select id="Transportation" name="Transportation" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="ap">Construction Management Grade:</label>
+            <select id="Construction" name="Construction" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            <input type="hidden" id="MidtermstudentIDcivil" name="MidtermstudentIDcivil">
+            <input type="hidden" id="MidtermstudentNameCivil" name="MidtermstudentNameCivil">
+            
+            <input class="grade-submit" type="submit" value="Submit">
+            <button class="grade-back" type="button" onclick="hidePopupCivilMidterm()">Close</button>
+        </form>
+        </div>
+        <!-- Overlay Civil midterm -->
+        <div id="MidtermoverlayCivil" class="overlayCivil"></div>
+
+        <!-- Popup Div for Civil finals  -->
+        <div id="FinalspopupCivil" class="popupCivil">
+        <form id="grade-Finals-Civil" onsubmit="event.preventDefault(); submitFormCivilFinals();"> 
+            <h2 class="input-grades">Input Finals Grades</h2>
+            
+            <label for="math">Statics Grade:</label>
+            <select id="Statics" name="Statics" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="filipino">Structural Analysis Grade:</label>
+            <select id="Structural" name="Structural" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="english">Fluid Mechanics Grade:</label>
+            <select id="Fluid" name="Fluid" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="science">Geotechnical Engineering Grade:</label>
+            <select id="Geotechnical" name="Geotechnical" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="pe">Transportation Engineering Grade:</label>
+            <select id="Transportation" name="Transportation" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            
+            <label for="ap">Construction Management Grade:</label>
+            <select id="Construction" name="Construction" required>
+                <option value="1.00">1.00</option>
+                <option value="1.25">1.25</option>
+                <option value="1.50">1.50</option>
+                <option value="1.75">1.75</option>
+                <option value="2.00">2.00</option>
+                <option value="2.25">2.25</option>
+                <option value="2.50">2.50</option>
+                <option value="2.75">2.75</option>
+                <option value="3.00">3.00</option>
+                <option value="5.00">5.00</option>
+                <option value="INC">INC</option>
+            </select><br><br>
+            <input type="hidden" id="FinalsstudentIDcivil" name="FinalsstudentIDcivil">
+            <input type="hidden" id="FinalsstudentNameCivil" name="FinalsstudentNameCivil">
+            
+            <input class="grade-submit" type="submit" value="Submit">
+            <button class="grade-back" type="button" onclick="hidePopupCivilFinals()">Close</button>
+        </form>
+        </div>
+        <!-- Overlay Civil finals -->
+        <div id="FinalsoverlayCivil" class="overlayCivil"></div>
 
 
         <!-- Announcement Section -->
@@ -790,36 +1626,100 @@ if (!isset($_SESSION['adminUsername'])) {
     <!-- JavaScript -->
     <script>
         // Function to show the popup for crim
-        function showPopupCrim(studentID, studentName) {
-            document.getElementById('popup').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
+        function showPopupCrimPrelims(studentID, studentName) {
+            document.getElementById('popupCrimPrelims').style.display = 'block';
+            document.getElementById('overlayCrimPrelims').style.display = 'block';
             // Set the studentID in the hidden input field
-            document.getElementById('studentID').value = studentID;
-            document.getElementById('studentName').value = studentName;
+            document.getElementById('CrimPrelimsstudentID').value = studentID;
+            document.getElementById('CrimPrelimsstudentName').value = studentName;
         }
-        // Function to show the popup for IT
-        function showPopupIT(studentID, studentName) {
-            document.getElementById('popupIT').style.display = 'block';
-            document.getElementById('overlayIT').style.display = 'block';
+        // Function to show the popup for crim midterm
+        function showPopupCrimMidterm(studentID, studentName) {
+            document.getElementById('popupCrimMidterm').style.display = 'block';
+            document.getElementById('overlayCrimMidterm').style.display = 'block';
             // Set the studentID in the hidden input field
-            document.getElementById('studentIDIT').value = studentID;
-            document.getElementById('studentNameIT').value = studentName;
+            document.getElementById('CrimMidtermstudentID').value = studentID;
+            document.getElementById('CrimMidtermstudentName').value = studentName;
         }
-        // Function to show the popup for Comsci
-        function showPopupComsci(studentID, studentName) {
-            document.getElementById('popupComsci').style.display = 'block';
-            document.getElementById('overlayComsci').style.display = 'block';
+        // Function to show the popup for crim finals
+        function showPopupCrimFinals(studentID, studentName) {
+            document.getElementById('popupCrimFinals').style.display = 'block';
+            document.getElementById('overlayCrimFinals').style.display = 'block';
             // Set the studentID in the hidden input field
-            document.getElementById('studentIDcomSci').value = studentID;
-            document.getElementById('studentNameComSci').value = studentName;
+            document.getElementById('CrimFinalsstudentID').value = studentID;
+            document.getElementById('CrimFinalsstudentName').value = studentName;
+        }
+        // Function to show the popup for IT prelims
+        function showPopupITprelims(studentID, studentName) {
+            document.getElementById('popupITprelims').style.display = 'block';
+            document.getElementById('overlayITprelims').style.display = 'block';
+            // Set the studentID in the hidden input field
+            document.getElementById('PrelimsstudentIDIT').value = studentID;
+            document.getElementById('PrelimsstudentNameIT').value = studentName;
+        }
+        // Function to show the popup for IT midterm
+        function showPopupITmidterm(studentID, studentName) {
+            document.getElementById('popupITmidterm').style.display = 'block';
+            document.getElementById('overlayITmidterm').style.display = 'block';
+            // Set the studentID in the hidden input field
+            document.getElementById('MidtermstudentIDIT').value = studentID;
+            document.getElementById('MidtermstudentNameIT').value = studentName;
+        }
+        // Function to show the popup for IT finals
+        function showPopupITFinals(studentID, studentName) {
+            document.getElementById('popupITFinals').style.display = 'block';
+            document.getElementById('overlayITFinals').style.display = 'block';
+            // Set the studentID in the hidden input field
+            document.getElementById('FinalsstudentIDIT').value = studentID;
+            document.getElementById('FinalsstudentNameIT').value = studentName;
+        }
+        // Function to show the popup for Comsci prelims
+        function showPopupComsciPrelims(studentID, studentName) {
+            document.getElementById('PrelimspopupComsci').style.display = 'block';
+            document.getElementById('PrelimsoverlayComsci').style.display = 'block';
+            // Set the studentID in the hidden input field
+            document.getElementById('PrelimsstudentIDcomSci').value = studentID;
+            document.getElementById('PrelimsstudentNameComSci').value = studentName;
+        }
+        // Function to show the popup for Comsci midterms
+        function showPopupComsciMidterm(studentID, studentName) {
+            document.getElementById('MidtermpopupComsci').style.display = 'block';
+            document.getElementById('MidtermoverlayComsci').style.display = 'block';
+            // Set the studentID in the hidden input field
+            document.getElementById('MidtermstudentIDcomSci').value = studentID;
+            document.getElementById('MidtermstudentNameComSci').value = studentName;
+        }
+        // Function to show the popup for Comsci finals
+        function showPopupComsciFinals(studentID, studentName) {
+            document.getElementById('FinalspopupComsci').style.display = 'block';
+            document.getElementById('FinalsoverlayComsci').style.display = 'block';
+            // Set the studentID in the hidden input field
+            document.getElementById('FinalsstudentIDcomSci').value = studentID;
+            document.getElementById('FinalsstudentNameComSci').value = studentName;
         }
         // Function to show the popup for Civil
-        function showPopupCivil(studentID, studentName) {
-            document.getElementById('popupCivil').style.display = 'block';
-            document.getElementById('overlayCivil').style.display = 'block';
+        function showPopupCivilPrelims(studentID, studentName) {
+            document.getElementById('PrelimspopupCivil').style.display = 'block';
+            document.getElementById('PrelimsoverlayCivil').style.display = 'block';
             // Set the studentID in the hidden input field
-            document.getElementById('studentIDcivil').value = studentID;
-            document.getElementById('studentNameCivil').value = studentName;
+            document.getElementById('PrelimsstudentIDcivil').value = studentID;
+            document.getElementById('PrelimsstudentNameCivil').value = studentName;
+        }
+        // Function to show the popup for Civil midterm
+        function showPopupCivilMidterm(studentID, studentName) {
+            document.getElementById('MidtermpopupCivil').style.display = 'block';
+            document.getElementById('MidtermoverlayCivil').style.display = 'block';
+            // Set the studentID in the hidden input field
+            document.getElementById('MidtermstudentIDcivil').value = studentID;
+            document.getElementById('MidtermstudentNameCivil').value = studentName;
+        }
+        // Function to show the popup for Civil midterm
+        function showPopupCivilFinals(studentID, studentName) {
+            document.getElementById('FinalspopupCivil').style.display = 'block';
+            document.getElementById('FinalsoverlayCivil').style.display = 'block';
+            // Set the studentID in the hidden input field
+            document.getElementById('FinalsstudentIDcivil').value = studentID;
+            document.getElementById('FinalsstudentNameCivil').value = studentName;
         }
         //Function to display the announce popup
         function showPopup2() {
@@ -832,37 +1732,79 @@ if (!isset($_SESSION['adminUsername'])) {
             document.getElementById('overlayy').style.display = 'none';
         }
         // Function to hide the popup for crim
-        function hidePopupCrim() {
-            document.getElementById('popup').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
+        function hidePopupCrimPrelims() {
+            document.getElementById('popupCrimPrelims').style.display = 'none';
+            document.getElementById('overlayCrimPrelims').style.display = 'none';
         }
-        // Function to hide the popup for IT
-        function hidePopupIT() {
-            document.getElementById('popupIT').style.display = 'none';
-            document.getElementById('overlayIT').style.display = 'none';
+        // Function to hide the popup for crim
+        function hidePopupCrimFinals() {
+            document.getElementById('popupCrimFinals').style.display = 'none';
+            document.getElementById('overlayCrimFinals').style.display = 'none';
+        }
+        // Function to hide the popup for crim midterm
+        function hidePopupCrimMidterm() {
+            document.getElementById('popupCrimMidterm').style.display = 'none';
+            document.getElementById('overlayCrimMidterm').style.display = 'none';
+        }
+        // Function to hide the popup for IT prelims
+        function hidePopupITprelims() {
+            document.getElementById('popupITprelims').style.display = 'none';
+            document.getElementById('overlayITprelims').style.display = 'none';
+        }
+        // Function to hide the popup for IT midterm
+        function hidePopupITmidterm() {
+            document.getElementById('popupITmidterm').style.display = 'none';
+            document.getElementById('overlayITmidterm').style.display = 'none';
+        }
+        // Function to hide the popup for IT finals
+        function hidePopupITFinals() {
+            document.getElementById('popupITFinals').style.display = 'none';
+            document.getElementById('overlayITFinals').style.display = 'none';
         }
         // Function to hide the popup for Comsci
-        function hidePopupComsci() {
-            document.getElementById('popupComsci').style.display = 'none';
-            document.getElementById('overlayComsci').style.display = 'none';
+        function hidePopupComsciPrelims() {
+            document.getElementById('PrelimspopupComsci').style.display = 'none';
+            document.getElementById('PrelimsoverlayComsci').style.display = 'none';
+        }
+        // Function to hide the popup for Comsci
+        function hidePopupComsciMidterm() {
+            document.getElementById('MidtermpopupComsci').style.display = 'none';
+            document.getElementById('MidtermoverlayComsci').style.display = 'none';
+        }
+        // Function to hide the popup for Comsci
+        function hidePopupComsciFinals() {
+            document.getElementById('FinalspopupComsci').style.display = 'none';
+            document.getElementById('FinalsoverlayComsci').style.display = 'none';
         }
         // Function to hide the popup for Civil
-        function hidePopupCivil() {
-            document.getElementById('popupCivil').style.display = 'none';
-            document.getElementById('overlayCivil').style.display = 'none';
+        function hidePopupCivilPrelims() {
+            document.getElementById('PrelimspopupCivil').style.display = 'none';
+            document.getElementById('PrelimsoverlayCivil').style.display = 'none';
         }
+        // Function to hide the popup for Civil
+        function hidePopupCivilMidterm() {
+            document.getElementById('MidtermpopupCivil').style.display = 'none';
+            document.getElementById('MidtermoverlayCivil').style.display = 'none';
+        }
+        // Function to hide the popup for Civil
+        function hidePopupCivilFinals() {
+            document.getElementById('FinalspopupCivil').style.display = 'none';
+            document.getElementById('FinalsoverlayCivil').style.display = 'none';
+        }
+
+
 
         
         //Function to update grades of crim students
         // Function to handle form submission
-        function submitFormCrim() {
+        function submitFormCrimPrelims() {
         // Submit the form using AJAX
-        var form = document.getElementById('grade-form-crim');
+        var form = document.getElementById('grade-prelims-crim');
         var formData = new FormData(form);
 
         // Create a new XMLHttpRequest object
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "Update_grades_crim.php", true);
+        xhr.open("POST", "prelims_grades_crim.php", true);
         xhr.onload = function () {
             if (xhr.status == 200) {
                 // Show success message using SweetAlert
@@ -899,16 +1841,109 @@ if (!isset($_SESSION['adminUsername'])) {
         xhr.send(formData);
     }
 
-    //Function to update grades of IT students
+    //Function to update grades of crim students
         // Function to handle form submission
-        function submitFormIT() {
+        function submitFormCrimMidterm() {
         // Submit the form using AJAX
-        var formIT = document.getElementById('grade-form-IT');
+        var form = document.getElementById('grade-Midterm-crim');
+        var formData = new FormData(form);
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "midterm_grades_crim.php", true);
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                // Show success message using SweetAlert
+                Swal.fire({
+                    title: 'Success!',
+                    text: xhr.responseText,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page after the SweetAlert is closed
+                        location.reload();
+                    }
+                });
+            } else {
+                // Show error message using SweetAlert
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error: ' + xhr.statusText,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        };
+        xhr.onerror = function () {
+            // Show error message using SweetAlert
+            Swal.fire({
+                title: 'Error!',
+                text: 'Request failed',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        };
+        xhr.send(formData);
+    }
+
+    //Function to update grades of crim students finals
+        // Function to handle form submission
+        function submitFormCrimFinals() {
+        // Submit the form using AJAX
+        var form = document.getElementById('grade-Finals-crim');
+        var formData = new FormData(form);
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "finals_grades_crim.php", true);
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                // Show success message using SweetAlert
+                Swal.fire({
+                    title: 'Success!',
+                    text: xhr.responseText,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page after the SweetAlert is closed
+                        location.reload();
+                    }
+                });
+            } else {
+                // Show error message using SweetAlert
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error: ' + xhr.statusText,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        };
+        xhr.onerror = function () {
+            // Show error message using SweetAlert
+            Swal.fire({
+                title: 'Error!',
+                text: 'Request failed',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        };
+        xhr.send(formData);
+    }
+
+
+    //Function to update grades of IT students prelims
+        // Function to handle form submission
+        function submitFormITprelims() {
+        // Submit the form using AJAX
+        var formIT = document.getElementById('grade-prelims-IT');
         var formData = new FormData(formIT);
 
         // Create a new XMLHttpRequest object
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "Update_grades_it.php", true);
+        xhr.open("POST", "prelims_grades_it.php", true);
         xhr.onload = function () {
             if (xhr.status == 200) {
                 console.log(formData);
@@ -946,16 +1981,204 @@ if (!isset($_SESSION['adminUsername'])) {
         xhr.send(formData);
     }
 
-    //Function to update grades of Comsci students
+    //Function to update grades of IT students midterm
         // Function to handle form submission
-        function submitFormComsci() {
+        function submitFormITmidterm() {
         // Submit the form using AJAX
-        var formComsci = document.getElementById('grade-form-Comsci');
+        var formIT = document.getElementById('grade-midterm-IT');
+        var formData = new FormData(formIT);
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "midterm_grades_it.php", true);
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                console.log(formData);
+                // Show success message using SweetAlert
+                Swal.fire({
+                    title: 'Success!',
+                    text: xhr.responseText,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page after the SweetAlert is closed
+                        location.reload();
+                    }
+                });
+            } else {
+                // Show error message using SweetAlert
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error: ' + xhr.statusText,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        };
+        xhr.onerror = function () {
+            // Show error message using SweetAlert
+            Swal.fire({
+                title: 'Error!',
+                text: 'Request failed',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        };
+        xhr.send(formData);
+    }
+
+    //Function to update grades of IT students midterm
+        // Function to handle form submission
+        function submitFormITFinals() {
+        // Submit the form using AJAX
+        var formIT = document.getElementById('grade-Finals-IT');
+        var formData = new FormData(formIT);
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "finals_grades_it.php", true);
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                console.log(formData);
+                // Show success message using SweetAlert
+                Swal.fire({
+                    title: 'Success!',
+                    text: xhr.responseText,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page after the SweetAlert is closed
+                        location.reload();
+                    }
+                });
+            } else {
+                // Show error message using SweetAlert
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error: ' + xhr.statusText,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        };
+        xhr.onerror = function () {
+            // Show error message using SweetAlert
+            Swal.fire({
+                title: 'Error!',
+                text: 'Request failed',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        };
+        xhr.send(formData);
+    }
+
+    //Function to update grades of Comsci students prelims
+        // Function to handle form submission
+        function submitFormComsciPrelims() {
+        // Submit the form using AJAX
+        var formComsci = document.getElementById('grade-Prelims-Comsci');
         var formData = new FormData(formComsci);
 
         // Create a new XMLHttpRequest object
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "Update_grades_comsci.php", true);
+        xhr.open("POST", "prelims_grades_comsci.php", true);
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                console.log(formData);
+                // Show success message using SweetAlert
+                Swal.fire({
+                    title: 'Success!',
+                    text: xhr.responseText,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page after the SweetAlert is closed
+                        location.reload();
+                    }
+                });
+            } else {
+                // Show error message using SweetAlert
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error: ' + xhr.statusText,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        };
+        xhr.onerror = function () {
+            // Show error message using SweetAlert
+            Swal.fire({
+                title: 'Error!',
+                text: 'Request failed',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        };
+        xhr.send(formData);
+    }
+
+    //Function to update grades of Comsci students midterm
+        // Function to handle form submission
+        function submitFormComsciMidterm() {
+        // Submit the form using AJAX
+        var formComsci = document.getElementById('grade-midterm-Comsci');
+        var formData = new FormData(formComsci);
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "midterm_grades_comsci.php", true);
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                console.log(formData);
+                // Show success message using SweetAlert
+                Swal.fire({
+                    title: 'Success!',
+                    text: xhr.responseText,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page after the SweetAlert is closed
+                        location.reload();
+                    }
+                });
+            } else {
+                // Show error message using SweetAlert
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error: ' + xhr.statusText,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        };
+        xhr.onerror = function () {
+            // Show error message using SweetAlert
+            Swal.fire({
+                title: 'Error!',
+                text: 'Request failed',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        };
+        xhr.send(formData);
+    }
+
+    //Function to update grades of Comsci students finals
+        // Function to handle form submission
+        function submitFormComsciFinals() {
+        // Submit the form using AJAX
+        var formComsci = document.getElementById('grade-Finals-Comsci');
+        var formData = new FormData(formComsci);
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "finals_grades_comsci.php", true);
         xhr.onload = function () {
             if (xhr.status == 200) {
                 console.log(formData);
@@ -995,14 +2218,108 @@ if (!isset($_SESSION['adminUsername'])) {
 
     //Function to update grades of Comsci students
         // Function to handle form submission
-        function submitFormCivil() {
+        function submitFormCivilPrelims() {
         // Submit the form using AJAX
-        var formCivil = document.getElementById('grade-form-Civil');
+        var formCivil = document.getElementById('grade-Prelims-Civil');
         var formData = new FormData(formCivil);
 
         // Create a new XMLHttpRequest object
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "Update_grades_civil.php", true);
+        xhr.open("POST", "prelims_grades_civil.php", true);
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                console.log(formData);
+                // Show success message using SweetAlert
+                Swal.fire({
+                    title: 'Success!',
+                    text: xhr.responseText,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page after the SweetAlert is closed
+                        location.reload();
+                    }
+                });
+            } else {
+                // Show error message using SweetAlert
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error: ' + xhr.statusText,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        };
+        xhr.onerror = function () {
+            // Show error message using SweetAlert
+            Swal.fire({
+                title: 'Error!',
+                text: 'Request failed',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        };
+        xhr.send(formData);
+    }
+
+    //Function to update grades of Comsci students
+        // Function to handle form submission
+        function submitFormCivilMidterm() {
+        // Submit the form using AJAX
+        var formCivil = document.getElementById('grade-Midterm-Civil');
+        var formData = new FormData(formCivil);
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "midterm_grades_civil.php", true);
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                console.log(formData);
+                // Show success message using SweetAlert
+                Swal.fire({
+                    title: 'Success!',
+                    text: xhr.responseText,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page after the SweetAlert is closed
+                        location.reload();
+                    }
+                });
+            } else {
+                // Show error message using SweetAlert
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error: ' + xhr.statusText,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        };
+        xhr.onerror = function () {
+            // Show error message using SweetAlert
+            Swal.fire({
+                title: 'Error!',
+                text: 'Request failed',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        };
+        xhr.send(formData);
+    }
+
+    //Function to update grades of civil finals
+        // Function to handle form submission
+        function submitFormCivilFinals() {
+        // Submit the form using AJAX
+        var formCivil = document.getElementById('grade-Finals-Civil');
+        var formData = new FormData(formCivil);
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "finals_grades_civil.php", true);
         xhr.onload = function () {
             if (xhr.status == 200) {
                 console.log(formData);

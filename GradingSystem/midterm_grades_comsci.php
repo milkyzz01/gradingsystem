@@ -1,28 +1,28 @@
 <?php
-// update_grades_it.php
+// update_grades_comsci.php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database connection
     include 'db_connection.php';
 
     // Get student ID from POST request
-    $studentID = $_POST['studentIDIT'];
-    $studentName = $_POST['studentNameIT'];
-    $Programming = $_POST['Programming'];
-    $Database = $_POST['Database'];
-    $Web = $_POST['Web'];
-    $Networking = $_POST['Networking'];
-    $Operating = $_POST['Operating'];
-    $Information = $_POST['Information'];
+    $studentID = $_POST['MidtermstudentIDcomSci'];
+    $studentName = $_POST['MidtermstudentNameComSci'];
+    $Algorithms = $_POST['Algorithms'];
+    $Structures = $_POST['Structures'];
+    $Software = $_POST['Software'];
+    $Architecture = $_POST['Architecture'];
+    $Intelligence = $_POST['Intelligence'];
+    $Graphics = $_POST['Graphics'];
 
     // Start transaction
     $conn->begin_transaction();
 
     try {
         // Update grade_table for the specific student
-        $sql = "UPDATE it_grades_tbl SET Programming_Fundamentals = ?, Database_Management = ?, Web_Development = ?, Networking = ?, Operating_Systems = ?, Information_Security = ? WHERE studentID = ?";
+        $sql = "UPDATE comscimidterm_table SET Algorithms = ?, Data_Structures = ?, Software_Engineering = ?, Computer_Architecture = ?, 	Artificial_Intelligence = ?, Computer_Graphics = ? WHERE studentID = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ddddddi", $Programming, $Database, $Web, $Networking, $Operating, $Information, $studentID);
+        $stmt->bind_param("ddddddi", $Algorithms, $Structures, $Software, $Architecture,  $Intelligence, $Graphics, $studentID);
 
         if ($stmt->execute()) {
             // Commit transaction

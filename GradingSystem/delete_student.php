@@ -27,18 +27,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Determine the grade table based on the student's program
             $gradeTable = '';
+            $gradeTableMidterms = '';
+            $gradeTableFinals = '';
             switch ($studentProgram) {
                 case 'Criminology':
-                    $gradeTable = 'criminologygrades_tbl';
+                    $gradeTable = 'crimprelims_table';
+                    $gradeTableMidterms = 'crimmidterm_table';
+                    $gradeTableFinals = 'crimfinal_table';
                     break;
                 case 'Information Technology':
-                    $gradeTable = 'it_grades_tbl';
+                    $gradeTable = 'itprelims_table';
+                    $gradeTableMidterms = 'itmidterm_table';
+                    $gradeTableFinals = 'itfinal_table';
                     break;
                 case 'Computer Science':
-                    $gradeTable = 'comsci_grades_tbl';
+                    $gradeTable = 'comsciprelims_table';
+                    $gradeTableMidterms = 'comscimidterm_table';
+                    $gradeTableFinals = 'comscifinal_table';
                     break;
                 case 'Civil Engineer':
-                    $gradeTable = 'civil_grades_tbl';
+                    $gradeTable = 'civilprelims_table';
+                    $gradeTableMidterms = 'civilmidterm_table';
+                    $gradeTableFinals = 'civilfinal_table';
                     break;
                 default:
                     // Handle unknown programs, if any
@@ -56,11 +66,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmtDeleteStudent->execute()) {
                 // Delete the student's grades from the corresponding grade table
                 $sqlDeleteGrades = "DELETE FROM $gradeTable WHERE studentID = ?";
+                $sqlDeleteGradesMidterms = "DELETE FROM $gradeTableMidterms WHERE studentID = ?";
+                $sqlDeleteGradesFinals = "DELETE FROM $gradeTableFinals WHERE studentID = ?";
                 $stmtDeleteGrades = $conn->prepare($sqlDeleteGrades);
+                $stmtDeleteGradesMidterms = $conn->prepare($sqlDeleteGradesMidterms);
+                $stmtDeleteGradesFinals = $conn->prepare($sqlDeleteGradesFinals);
                 $stmtDeleteGrades->bind_param("i", $studentID);
+                $stmtDeleteGradesMidterms->bind_param("i", $studentID);
+                $stmtDeleteGradesFinals->bind_param("i", $studentID);
 
                 // Execute the statement
-                if ($stmtDeleteGrades->execute()) {
+                if ($stmtDeleteGrades->execute() && $stmtDeleteGradesMidterms->execute() && $stmtDeleteGradesFinals->execute()) {
                     // Commit the transaction
                     $conn->commit();
                     echo "Student and associated grades deleted successfully.";

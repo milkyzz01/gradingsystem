@@ -1,28 +1,28 @@
 <?php
-// update_grades_comsci.php
+// update_grades_civil.php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database connection
     include 'db_connection.php';
 
     // Get student ID from POST request
-    $studentID = $_POST['studentIDcomSci'];
-    $studentName = $_POST['studentNameComSci'];
-    $Algorithms = $_POST['Algorithms'];
-    $Structures = $_POST['Structures'];
-    $Software = $_POST['Software'];
-    $Architecture = $_POST['Architecture'];
-    $Intelligence = $_POST['Intelligence'];
-    $Graphics = $_POST['Graphics'];
+    $studentID = $_POST['MidtermstudentIDcivil'];
+    $studentName = $_POST['MidtermstudentNameCivil'];
+    $Statics = $_POST['Statics'];
+    $Structural = $_POST['Structural'];
+    $Fluid = $_POST['Fluid'];
+    $Geotechnical = $_POST['Geotechnical'];
+    $Transportation = $_POST['Transportation'];
+    $Construction = $_POST['Construction'];
 
     // Start transaction
     $conn->begin_transaction();
 
     try {
         // Update grade_table for the specific student
-        $sql = "UPDATE comsci_grades_tbl SET Algorithms = ?, Data_Structures = ?, Software_Engineering = ?, Computer_Architecture = ?, 	Artificial_Intelligence = ?, Computer_Graphics = ? WHERE studentID = ?";
+        $sql = "UPDATE civilmidterm_table SET Statics = ?, Structural_Analysis = ?, Fluid_Mechanics = ?, Geotechnical_Engineering = ?, Transportation_Engineering = ?, Construction_Management = ? WHERE studentID = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ddddddi", $Algorithms, $Structures, $Software, $Architecture,  $Intelligence, $Graphics, $studentID);
+        $stmt->bind_param("ddddddi", $Statics, $Structural, $Fluid, $Geotechnical, $Transportation, $Construction, $studentID);
 
         if ($stmt->execute()) {
             // Commit transaction

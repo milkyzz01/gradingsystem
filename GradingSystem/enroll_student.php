@@ -30,24 +30,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
                 // Determine the grade table and subjects based on the student's program
-                $gradeTable = '';
+                $gradeTablePrelims = '';
+                $gradeTableMidterm = '';
+                $gradeTableFinal = '';
                 $subjects = [];
 
                 switch ($studentProgram) {
                     case 'Criminology':
-                        $gradeTable = 'criminologygrades_tbl';
+                        $gradeTablePrelims = 'crimprelims_table';
+                        $gradeTableMidterm = 'crimmidterm_table';
+                        $gradeTableFinal = 'crimfinal_table';
                         $subjects = ['Crime_Scene_Investigation', 'Forensic_Psychology', 'Legal_Studies', 'Criminal_Law	', 'Victimology', 'Criminal_Justice'];
                         break;
                     case 'Information Technology':
-                        $gradeTable = 'it_grades_tbl';
+                        $gradeTablePrelims = 'itprelims_table';
+                        $gradeTableMidterm = 'itmidterm_table';
+                        $gradeTableFinal = 'itfinal_table';
                         $subjects = ['Programming_Fundamentals', 'Database_Management', 'Web_Development', 'Networking', 'Operating_Systems', 'Information_Security'];
                         break;
                     case 'Computer Science':
-                        $gradeTable = 'comsci_grades_tbl';
+                        $gradeTablePrelims = 'comsciprelims_table';
+                        $gradeTableMidterm = 'comscimidterm_table';
+                        $gradeTableFinal = 'comscifinal_table';
                         $subjects = ['Algorithms', 'Data_Structures	', 'Software_Engineering', 'Computer_Architecture', 'Artificial_Intelligence', 'Computer_Graphics'];
                         break;
                     case 'Civil Engineer':
-                        $gradeTable = 'civil_grades_tbl';
+                        $gradeTablePrelims = 'civilprelims_table';
+                        $gradeTableMidterm = 'civilmidterm_table';
+                        $gradeTableFinal = 'civilfinal_table';
                         $subjects = ['Statics', 'Structural_Analysis', 'Fluid_Mechanics', 'Geotechnical_Engineering', 'Transportation_Engineering', 'Construction_Management'];
                         break;
                     default:
@@ -60,11 +70,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Prepare the SQL statement for inserting grades
                 $subjectColumns = implode(', ', $subjects);
                 $placeholders = implode(', ', array_fill(0, count($subjects), '0.00'));
-                $sql = "INSERT INTO $gradeTable (studentID, $subjectColumns) VALUES (?, $placeholders)";
+                $sql = "INSERT INTO $gradeTablePrelims (studentID, $subjectColumns) VALUES (?, $placeholders)";
+                $sqlMidterm = "INSERT INTO $gradeTableMidterm (studentID, $subjectColumns) VALUES (?, $placeholders)";
+                $sqlFinal = "INSERT INTO $gradeTableFinal (studentID, $subjectColumns) VALUES (?, $placeholders)";
                 $stmt = $conn->prepare($sql);
+                $stmtt = $conn->prepare($sqlMidterm);
+                $stmttt = $conn->prepare($sqlFinal);
                 $stmt->bind_param("i", $studentID);
+                $stmtt->bind_param("i", $studentID);
+                $stmttt->bind_param("i", $studentID);
 
-                if ($stmt->execute()) {
+                if ($stmt->execute() && $stmtt->execute() && $stmttt->execute()) {
                     // Commit transaction
                     $conn->commit();
                     echo "Student enrolled and grade entry created successfully";
@@ -85,6 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $stmt->close();
+        $stmtt->close();
+        $stmttt->close();
     } catch (Exception $e) {
         // Rollback transaction in case of an exception
         $conn->rollback();

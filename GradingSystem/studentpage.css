@@ -15,7 +15,20 @@ body{
     margin: 0;
     padding: 0;
 }
-
+.printgrades{
+    height: 40px;
+    width: 22%;
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bolder;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: 0.6s;
+    margin-top: 2%;
+}
+.printgrades:hover{
+    background-color: rgb(59, 177, 59);
+}
 .profile{
     display: flex;
     padding-left: 10%;
@@ -53,6 +66,10 @@ body{
     border-radius: 20px;
     border: 1px solid black;
 }
+.prelims-midterm-finals{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: black;
+}
 .studentStatus{
     color: green;
 }
@@ -61,7 +78,6 @@ body{
     border-collapse: collapse;
     width: 100%;
     overflow: auto;
-    margin-top: 5%;
 }
 
 .grades{
@@ -70,6 +86,15 @@ body{
     padding-bottom: 80px;
     border-radius: 20px;
     border: 1px solid black;
+}
+.report-grades{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+
+}
+.pdf{
+    width: 100px;
+    height: 200px;
 }
 
 #unenrolled-table tr:nth-child(even){background-color: #f2f2f2;}
@@ -146,6 +171,12 @@ ul li img.logo {
     display: flex;
     justify-content: center;
     gap: 30px;
+}
+.pdfdl{
+    cursor: pointer;
+}
+.pdfdl:hover{
+    color: rgb(54, 54, 172);
 }
 a{
     text-decoration: none;

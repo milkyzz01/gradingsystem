@@ -6,8 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'db_connection.php';
 
     // Get student ID from POST request
-    $studentID = $_POST['studentIDcivil'];
-    $studentName = $_POST['studentNameCivil'];
+    $studentID = $_POST['FinalsstudentIDcivil'];
+    $studentName = $_POST['FinalsstudentNameCivil'];
     $Statics = $_POST['Statics'];
     $Structural = $_POST['Structural'];
     $Fluid = $_POST['Fluid'];
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Update grade_table for the specific student
-        $sql = "UPDATE civil_grades_tbl SET Statics = ?, Structural_Analysis = ?, Fluid_Mechanics = ?, Geotechnical_Engineering = ?, Transportation_Engineering = ?, Construction_Management = ? WHERE studentID = ?";
+        $sql = "UPDATE civilfinal_table SET Statics = ?, Structural_Analysis = ?, Fluid_Mechanics = ?, Geotechnical_Engineering = ?, Transportation_Engineering = ?, Construction_Management = ? WHERE studentID = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ddddddi", $Statics, $Structural, $Fluid, $Geotechnical, $Transportation, $Construction, $studentID);
 
